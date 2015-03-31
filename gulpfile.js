@@ -50,7 +50,13 @@ gulp.task('release', ['test'], function() {
 
 
     cp.exec('git log `git describe --tags --abbrev=0`..HEAD --pretty=format:"  - %s"', function(err, stdout, stderr) {
-        var history = fs.readFileSync('./history.md');
+        var history;
+
+        try {
+            history = fs.readFileSync('./history.md');
+        } catch(e) {
+            history = '';
+        }
 
         console.log('Updating the history.md file');
 
