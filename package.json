@@ -1,6 +1,6 @@
 {
   "name": "dir-tree",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "https://github.com/uniqname/dir-tree.git",
   "description": "Creates an object representation of a directory tree begining at a given path",
   "main": "dir-tree.js",
