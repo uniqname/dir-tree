@@ -8,11 +8,9 @@ var fs = require('fs'),
 
         var tree = {},
             state,
-            callback = [].slice.call(arguments, -1);
+            callback = [].slice.call(arguments, -1)[0];
 
-        if (typeof callback !== 'function') {
-            callback = undefined;
-        }
+        callback = (typeof callback === 'function') ? callback : undefined;
 
         //TODO: implement igore globbing.
         ignoreGlob = ignoreGlob || 'node_modules';
@@ -40,7 +38,7 @@ var fs = require('fs'),
                                 // Allow for multiple paradigms vis-a-vis callback and promises.
 
                                 // if a callback was passed, execute it passing it the completed tree.
-                                callback(tree);
+                                callback && callback(tree);
 
                                 // resolve the promise with the completed tree..
                                 res(tree);
@@ -85,9 +83,5 @@ var fs = require('fs'),
     };
 
 emitter.required = eventState;
-
-// dirTree(process.cwd() + '/demo').then(function (tree) {
-//     console.log(tree);
-// });
 
 module.exports = dirTree;
